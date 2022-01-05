@@ -1,0 +1,93 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">add employee details</h1>
+	<form
+		action="/addEmployee"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize needs-validation"
+		novalidate
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="name" class="form-label">name</label>
+				<input
+					type="text"
+					name="name"
+					placeholder="Enter name"
+					id="name"
+					class="form-control"
+					pattern="[A-Za-z]{2,20}"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+			<div class="col">
+				<label for="address" class="form-label">address</label>
+				<textarea name="address" id="address" class="form-control" required></textarea>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="phone" class="form-label">phone</label>
+				<input
+					type="text"
+					name="phone"
+					placeholder="Enter phone"
+					id="phone"
+					class="form-control"
+					minlength="10"
+					maxlength="10"
+					pattern="[0-9]{10}"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+			<div class="col">
+				<label for="role" class="form-label">role</label>
+				<select class="form-select" name="role" id="role" required>
+					<option selected value="" disabled></option>
+					<option value="CEO">CEO</option>
+					<option value="authority">authority</option>
+					<option value="collector">collector</option>
+					<option value="driver">driver</option>
+				</select>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">submit</button>
+	</form>
+</div>
+<script>
+	(function () {
+		"use strict";
+
+		var forms = document.querySelectorAll(".needs-validation");
+
+		Array.prototype.slice.call(forms).forEach(function (form) {
+			form.addEventListener(
+				"submit",
+				function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+
+					form.classList.add("was-validated");
+				},
+				false
+			);
+		});
+	})();
+	let res = "<%= result%>";
+	if (res != "" && res != "failed") {
+		alert("success! redirecting...");
+		setTimeout(() => {
+			location.replace(res);
+		}, 2000);
+	} else if (res == "failed") {
+		alert("failed!");
+	}
+</script>
+<%- include('partials/footer') %>

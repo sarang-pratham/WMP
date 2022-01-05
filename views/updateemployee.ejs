@@ -1,0 +1,71 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">update employee details</h1>
+	<form
+		action="/updateemployee/<%=result[0].id%>"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize"
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="id" class="form-label">Employee ID</label>
+				<input
+					type="text"
+					name="id"
+					class="form-control"
+					id="id"
+					value="<%=result[0].id%>"
+					disabled
+				/>
+			</div>
+			<div class="col">
+				<label for="name" class="form-label">name</label>
+				<input
+					type="text"
+					name="name"
+					placeholder="Enter name"
+					id="name"
+					class="form-control"
+					value="<%=result[0].name%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="address" class="form-label">address</label>
+				<textarea name="address" id="address" class="form-control" required>
+<%=result[0].address%></textarea
+				>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="phone" class="form-label">phone</label>
+				<input
+					type="text"
+					name="phone"
+					placeholder="Enter phone"
+					id="phone"
+					class="form-control"
+					value="<%=result[0].phone%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="role" class="form-label">role</label>
+				<input
+					type="text"
+					name="role"
+					placeholder="Enter role"
+					id="role"
+					class="form-control"
+					value="<%=result[0].role%>"
+					required
+				/>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">update</button>
+	</form>
+</div>
+
+<%- include('partials/footer') %>

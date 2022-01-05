@@ -1,0 +1,60 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">update house details</h1>
+
+	<form
+		action="/updatehouse/<%=result[0].id%>"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize"
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="id" class="form-label">house ID</label>
+				<input
+					type="text"
+					name="id"
+					placeholder="Enter House ID"
+					class="form-control"
+					id="id"
+					value="<%=result[0].id%>"
+					disabled
+				/>
+			</div>
+			<div class="col">
+				<label for="phone" class="form-label">phone</label>
+				<input
+					type="text"
+					name="phone"
+					placeholder="Enter phone"
+					class="form-control"
+					id="phone"
+					value="<%=result[0].phone%>"
+					required
+				/>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="area" class="form-label">area</label>
+				<input
+					type="text"
+					name="area"
+					placeholder="Enter area"
+					class="form-control"
+					id="area"
+					value="<%=result[0].area%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="address" class="form-label">address</label>
+				<textarea name="address" id="address" class="form-control" required>
+<%=result[0].address%></textarea
+				>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">update</button>
+	</form>
+</div>
+
+<%- include('partials/footer') %>

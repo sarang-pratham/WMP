@@ -1,0 +1,82 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">update driver details</h1>
+
+	<form
+		action="/updatedriver/<%=result[0]._id%>"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize"
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="id" class="form-label">ID</label>
+				<input
+					type="text"
+					name="id"
+					placeholder="Enter ID"
+					id="id"
+					class="form-control"
+					value="<%=result[0].id%>"
+					disabled
+				/>
+			</div>
+			<div class="col">
+				<label for="vehicle_id" class="form-label">vehicle id</label>
+				<input
+					type="text"
+					name="vehicle_id"
+					placeholder="Enter vehicle ID"
+					id="vehicle_id"
+					class="form-control"
+					value="<%=result[0].vehicle_id%>"
+					required
+				/>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="authority" class="form-label">authority id</label>
+				<input
+					type="text"
+					name="authority_id"
+					placeholder="Enter authority ID"
+					id="authority"
+					class="form-control"
+					value="<%=result[0].authority_id%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="date" class="form-label">assign date</label>
+				<input
+					type="date"
+					name="assign_date"
+					placeholder="Enter assigned date"
+					id="date"
+					class="form-control"
+					value="<%=result[0].assign_date%>"
+					required
+				/>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col-6">
+				<label for="location" class="form-label">location</label>
+				<input
+					type="text"
+					name="location"
+					placeholder="Enter location"
+					id="location"
+					class="form-control"
+					value="<%=result[0].location%>"
+					required
+				/>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">update</button>
+	</form>
+</div>
+
+<%- include('partials/footer') %>

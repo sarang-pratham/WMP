@@ -1,0 +1,56 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<h1
+	class="border-bottom border-success border-4 text-capitalize position-relative w-75 mt-5"
+	style="left: 20.5%"
+>
+	vehicle details
+</h1>
+<table class="table table-striped container position-relative w-75 mt-2" style="left: 8%">
+	<thead class="fs-5 text-capitalize">
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">vehicle type</th>
+			<th scope="col">capacity</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%result.forEach((item)=>{ %>
+		<tr>
+			<td><%=item.id%></td>
+			<td><%=item.vehicle_type%></td>
+			<td><%=item.capacity%></td>
+			<%if(access.user.role == 'admin'){%>
+			<td>
+				<a href="/editvehicle/<%=item.id%>" class="btn" id="update-btn"
+					><i class="far fa-edit"></i
+				></a>
+			</td>
+			<td>
+				<a href="#" class="btn" id="delete-btn"><i class="fas fa-trash"></i></a>
+			</td>
+			<%}%>
+		</tr>
+		<% })%>
+	</tbody>
+</table>
+<script>
+	let deleteBtn = document.querySelectorAll("#delete-btn");
+	deleteBtn.forEach((btn) =>
+		btn.addEventListener("click", (e) => {
+			let deleteRefId =
+				e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild
+					.innerText;
+
+			let res = confirm("are you sure?");
+
+			if (res) {
+				fetch("/deletevehicle/" + deleteRefId, {
+					method: "delete",
+				}).then((res) => {
+					location.replace("/vehicles");
+				});
+			}
+		})
+	);
+</script>
+<%- include('partials/footer') %>

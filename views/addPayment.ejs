@@ -1,0 +1,96 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">add payment details</h1>
+
+	<form
+		action="/addPayment"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize needs-validation"
+		novalidate
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="house_id" class="form-label">house ID</label>
+				<select class="form-select" name="house_id" id="house_id" required>
+					<option selected value="" disabled></option>
+					<%house.forEach((item)=>{%>
+					<option value="<%=item.id%>"><%=item.id%></option>
+					<%})%>
+				</select>
+				<div class="invalid-feedback">required!</div>
+			</div>
+			<div class="col">
+				<label for="amount" class="form-label">amount</label>
+				<input
+					type="tel"
+					name="amount"
+					placeholder="Enter amount"
+					class="form-control"
+					id="amount"
+					maxlength="3"
+					pattern="[0-9]{2,3}"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+
+		<div class="row my-3">
+			<div class="col">
+				<label for="collector_id" class="form-label">collector ID</label>
+				<select class="form-select" name="collector_id" id="collector_id" required>
+					<option selected value="" disabled></option>
+					<%emp.forEach((item)=>{%>
+					<option value="<%=item.id%>"><%=item.id%></option>
+					<%})%>
+				</select>
+				<div class="invalid-feedback">required!</div>
+			</div>
+			<div class="col">
+				<label for="payment_date" class="form-label">payment date</label>
+				<input
+					type="date"
+					name="payment_date"
+					placeholder="Enter date"
+					class="form-control"
+					id="payment_date"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">submit</button>
+	</form>
+</div>
+
+<script>
+	(function () {
+		"use strict";
+
+		var forms = document.querySelectorAll(".needs-validation");
+
+		Array.prototype.slice.call(forms).forEach(function (form) {
+			form.addEventListener(
+				"submit",
+				function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+
+					form.classList.add("was-validated");
+				},
+				false
+			);
+		});
+	})();
+	let res = "<%= result%>";
+	if (res != "") {
+		alert("success! redirecting...");
+		setTimeout(() => {
+			location.replace(res);
+		}, 2000);
+	}
+</script>
+<%- include('partials/footer') %>

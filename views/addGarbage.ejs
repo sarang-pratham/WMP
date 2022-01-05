@@ -1,0 +1,95 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">add garbage details</h1>
+	<form
+		action="/addGarbage"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize needs-validation"
+		novalidate
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="driver_id" class="form-label">driver ID</label>
+				<select class="form-select" name="driver_id" id="driver_id" required>
+					<option selected value="" disabled></option>
+					<%driver.forEach((item)=>{%>
+					<option value="<%=item.id%>"><%=item.id%></option>
+					<% })%>
+				</select>
+				<div class="invalid-feedback">required!</div>
+			</div>
+			<div class="col">
+				<label for="degradable" class="form-label">degradable</label>
+				<input
+					type="text"
+					name="degradable"
+					placeholder="Enter degradable"
+					id="degradable"
+					class="form-control"
+					required
+					pattern="[0-9]{10}"
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="non_degradable" class="form-label">non degradable</label>
+				<input
+					type="text"
+					name="non_degradable"
+					placeholder="Enter non degradable"
+					id="non_degradable"
+					class="form-control"
+					required
+					pattern="[0-9]{10}"
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+			<div class="col">
+				<label for="collected_date" class="form-label">collected date</label>
+				<input
+					type="date"
+					name="collected_date"
+					placeholder="Enter collected date"
+					id="collected_date"
+					class="form-control"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">submit</button>
+	</form>
+</div>
+<script>
+	(function () {
+		"use strict";
+
+		var forms = document.querySelectorAll(".needs-validation");
+
+		Array.prototype.slice.call(forms).forEach(function (form) {
+			form.addEventListener(
+				"submit",
+				function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+
+					form.classList.add("was-validated");
+				},
+				false
+			);
+		});
+	})();
+	let res = "<%= result%>";
+	if (res != "") {
+		alert("success! redirecting...");
+		setTimeout(() => {
+			location.replace(res);
+		}, 2000);
+	}
+</script>
+<%- include('partials/footer') %>

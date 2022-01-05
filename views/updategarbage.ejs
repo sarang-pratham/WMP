@@ -1,0 +1,66 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">update garbage details</h1>
+	<form
+		action="/updategarbage/<%=result[0]._id%>"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize"
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="driver_id" class="form-label">driver ID</label>
+				<input
+					type="text"
+					name="driver_id"
+					placeholder="Enter driver ID"
+					id="driver_id"
+					class="form-control"
+					value="<%=result[0].driver_id%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="degradable" class="form-label">degradable</label>
+				<input
+					type="text"
+					name="degradable"
+					placeholder="Enter degradable"
+					id="degradable"
+					class="form-control"
+					value="<%=result[0].degradable%>"
+					required
+				/>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="non_degradable" class="form-label">non degradable</label>
+				<input
+					type="text"
+					name="non_degradable"
+					placeholder="Enter non degradable"
+					id="non_degradable"
+					class="form-control"
+					value="<%=result[0].non_degradable%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="collected_date" class="form-label">collected date</label>
+				<input
+					type="date"
+					name="collected_date"
+					placeholder="Enter collected date"
+					id="collected_date"
+					class="form-control"
+					value="<%=result[0].collected_date%>"
+					required
+				/>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">update</button>
+	</form>
+</div>
+
+<%- include('partials/footer') %>

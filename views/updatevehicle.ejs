@@ -1,0 +1,55 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">update vehicle details</h1>
+	<form
+		action="/updatevehicle/<%=result[0].id%>"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize"
+	>
+		<div class="row my-2">
+			<div class="col">
+				<label for="id" class="form-label">vehicle ID</label>
+				<input
+					type="text"
+					name="id"
+					placeholder="Enter ID"
+					class="form-control"
+					id="id"
+					value="<%=result[0].id%>"
+					disabled
+				/>
+			</div>
+			<div class="col">
+				<label for="vehicle_type" class="form-label">vehicle type</label>
+				<input
+					type="text"
+					name="vehicle_type"
+					placeholder="Enter vehicle type"
+					class="form-control"
+					id="vehicle_type"
+					value="<%=result[0].vehicle_type%>"
+					required
+				/>
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="col-6">
+				<label for="capacity" class="form-label">capacity</label>
+				<input
+					type="text"
+					name="capacity"
+					placeholder="Enter capacity"
+					class="form-control"
+					id="capacity"
+					value="<%=result[0].capacity%>"
+					required
+				/>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">update</button>
+	</form>
+</div>
+
+<%- include('partials/footer') %>

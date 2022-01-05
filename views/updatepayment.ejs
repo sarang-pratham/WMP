@@ -1,0 +1,77 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">update payment details</h1>
+	<form
+		action="/updatepayment/<%=result[0].id%>"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize"
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="id" class="form-label">ID</label>
+				<input
+					type="text"
+					name="id"
+					class="form-control"
+					id="id"
+					value="<%=result[0].id%>"
+					disabled
+				/>
+			</div>
+			<div class="col">
+				<label for="house_id" class="form-label">house ID</label>
+				<input
+					type="text"
+					name="house_id"
+					placeholder="Enter House ID"
+					class="form-control"
+					id="house_id"
+					value="<%=result[0].house_id%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="amount" class="form-label">amount</label>
+				<input
+					type="text"
+					name="amount"
+					placeholder="Enter amount"
+					class="form-control"
+					id="amount"
+					value="<%=result[0].amount%>"
+					required
+				/>
+			</div>
+		</div>
+
+		<div class="row my-3">
+			<div class="col">
+				<label for="collector_id" class="form-label">collector ID</label>
+				<input
+					type="text"
+					name="collector_id"
+					placeholder="Enter collector ID"
+					class="form-control"
+					id="collector_id"
+					value="<%=result[0].collector_id%>"
+					required
+				/>
+			</div>
+			<div class="col">
+				<label for="payment_date" class="form-label">payment date</label>
+				<input
+					type="date"
+					name="payment_date"
+					placeholder="Enter date"
+					class="form-control"
+					id="payment_date"
+					value="<%=result[0].payment_date%>"
+					required
+				/>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">submit</button>
+	</form>
+</div>
+<%- include('partials/footer') %>

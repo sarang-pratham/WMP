@@ -1,0 +1,108 @@
+
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<h1 class="border-bottom border-success border-4 text-capitalize">add driver details</h1>
+
+	<form
+		action="/addDriver"
+		method="POST"
+		class="bg-dark text-light p-4 rounded text-capitalize needs-validation"
+		novalidate
+	>
+		<div class="row my-3">
+			<div class="col">
+				<label for="id" class="form-label">ID</label>
+				<select class="form-select" name="id" id="id" required>
+					<option selected value="" disabled></option>
+					<%driver.forEach((item)=>{%>
+					<option value="<%=item.id%>"><%=item.id%></option>
+					<% })%>
+				</select>
+				<div class="invalid-feedback">Hmm.. this doesn't seem good!</div>
+			</div>
+			<div class="col">
+				<label for="vehicle_id" class="form-label">vehicle id</label>
+				<select class="form-select" name="vehicle_id" id="vehicle_id" required>
+					<option selected value="" disabled></option>
+					<%vehicle.forEach((item)=>{%>
+					<option value="<%=item.id%>"><%=item.id%></option>
+					<% })%>
+				</select>
+				<div class="invalid-feedback">You forgot!</div>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col">
+				<label for="authority" class="form-label">authority id</label>
+				<select class="form-select" name="authority_id" id="authority" required>
+					<option selected value="" disabled></option>
+					<%authority.forEach((item)=>{%>
+					<option value="<%=item.id%>"><%=item.id%></option>
+					<% })%>
+				</select>
+				<div class="invalid-feedback">Oops!</div>
+			</div>
+			<div class="col">
+				<label for="date" class="form-label">assign date</label>
+				<input
+					type="date"
+					name="assign_date"
+					placeholder="Enter assigned date"
+					id="date"
+					class="form-control"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="col-6">
+				<label for="location" class="form-label">location</label>
+				<input
+					type="text"
+					name="location"
+					placeholder="Enter location"
+					id="location"
+					class="form-control"
+					pattern="[A-Za-z]{2,100}"
+					required
+				/>
+				<div class="invalid-feedback">required!</div>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-success btn-lg text-capitalize mt-5">submit</button>
+	</form>
+</div>
+<script>
+	(function () {
+		"use strict";
+
+		var forms = document.querySelectorAll(".needs-validation");
+
+		Array.prototype.slice.call(forms).forEach(function (form) {
+			form.addEventListener(
+				"submit",
+				function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+
+					form.classList.add("was-validated");
+				},
+				false
+			);
+		});
+	})();
+
+	let res = "<%= result%>";
+	if (res != "") {
+		alert("success! redirecting...");
+		setTimeout(() => {
+			location.replace(res);
+		}, 2000);
+	}
+</script>
+<%- include('partials/footer') %>

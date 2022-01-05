@@ -1,0 +1,98 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+
+<div class="container position-relative w-75 mt-5" style="left: 8%">
+	<form action="/users" method="post" class="bg-dark text-light p-4 rounded text-capitalize">
+		<div class="row">
+			<div class="col-6 text-center fw-bold fs-1 text-secondary ">
+				<span class="border-bottom border-3 border-secondary  "> create access</span>
+				<div class="mt-5">
+				<span class="fw-bold">&#8420;</span>
+				<span class="fw-bold mx-5">&#9711;</span>
+				<span class="fw-bold">&#8414;</span>
+			</div>
+				
+			</div>
+			<div class="col-6 text-dark">
+				<div class="row">
+					<div class="form-floating mt-3 mb-4">
+							<input
+								type="text"
+								name="id"
+								id="id"
+								placeholder="Enter ID"
+								class="form-control"
+								required
+							/>
+							<label for="id" class="form-label ms-2">ID</label>
+					</div>
+			</div>
+			<div class="row">
+					<div class="form-floating mt-3 mb-4">
+							<input
+								type="text"
+								name="password"
+								id="password"
+								placeholder="Enter password"
+								class="form-control"
+								required
+							/>
+							<label for="password" class="form-label ms-2">password</label>
+					</div>
+			</div>
+				<button type="submit" class="btn btn-light btn-lg text-capitalize mt-5">Create User</button>
+		</div>
+		
+	</form>
+
+</div>
+	<h2 class="mt-5 fw-bold fs-1 text-capitalize border-bottom border-success border-3">all users </h2>
+	<table
+	class="table  table-light table-striped container position-relative w-50 mt-2"
+	style="left: -25%"
+>
+	<thead class="fs-5 text-capitalize">
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">ID</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<%num=1;%>
+		<%result.forEach((item)=>{ %>
+		<tr class="align-middle">
+			<td class="fw-bold"><%=num%></td>
+			<td><%=item.id%></td>
+			<td>
+				<a href="#" class="btn" id="delete-btn"><i class="fas fa-trash"></i></a>
+			</td>
+		</tr>
+		<% num+=1; })%>
+	</tbody>
+
+	</table>
+	<script>
+	let deleteBtn = document.querySelectorAll("#delete-btn");
+	deleteBtn.forEach((btn) =>
+		btn.addEventListener("click", (e) => {
+			let deleteRefId =
+				e.target.parentElement.parentElement.parentElement.parentElement.children
+					
+
+			let res = confirm("are you sure?");
+
+			if (res) {
+				fetch("/deleteuser/" + deleteRefId[1].innerText, {
+					method: "delete",
+				})
+					.then((res) => {
+						location.replace("/users");
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}
+		})
+	);
+</script>
+<%- include('partials/footer') %>

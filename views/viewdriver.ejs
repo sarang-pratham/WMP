@@ -1,0 +1,61 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<h1
+	class="border-bottom border-success border-4 text-capitalize position-relative w-75 mt-5"
+	style="left: 20.5%"
+>
+	driver details
+</h1>
+<table class="table table-striped container position-relative w-75 mt-2" style="left: 8%">
+	<thead class="fs-5 text-capitalize">
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">vehicle ID</th>
+			<th scope="col">authority ID</th>
+			<th scope="col">assign date</th>
+			<th scope="col">location</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%result.forEach((item)=>{ %>
+		<tr>
+			<td style="display: none"><%=item.id%></td>
+			<td><%=item.id%></td>
+			<td><%=item.vehicle_id%></td>
+			<td><%=item.authority_id%></td>
+			<td><%=item.assign_date%></td>
+			<td><%=item.location%></td>
+			<%if(access.user.role == 'admin'){%>
+			<td>
+				<a href="/editdriver/<%=item._id%>" class="btn" id="update-btn"
+					><i class="far fa-edit"></i
+				></a>
+			</td>
+			<td>
+				<a href="#" class="btn" id="delete-btn"><i class="fas fa-trash"></i></a>
+			</td>
+			<%}%>
+		</tr>
+		<% })%>
+	</tbody>
+</table>
+<script>
+	let deleteBtn = document.querySelectorAll("#delete-btn");
+	deleteBtn.forEach((btn) =>
+		btn.addEventListener("click", (e) => {
+			let deleteRefId =
+				e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild
+					.innerText;
+			console.log(deleteRefId);
+			let res = confirm("are you sure?");
+
+			if (res) {
+				fetch("/deletedriver/" + deleteRefId, {
+					method: "delete",
+				}).then((res) => {
+					location.replace("/drivers");
+				});
+			}
+		})
+	);
+</script>
+<%- include('partials/footer') %>

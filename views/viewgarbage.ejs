@@ -1,0 +1,60 @@
+<div class="position-fixed top-0 right-0 d-flex flex-column"><%- include('partials/header') %></div>
+<h1
+	class="border-bottom border-success border-4 text-capitalize position-relative w-75 mt-5"
+	style="left: 20.5%"
+>
+	garbage details
+</h1>
+<table class="table table-striped container position-relative w-75 mt-2" style="left: 8%">
+	<thead class="fs-5 text-capitalize">
+		<tr>
+			<th scope="col">Driver ID</th>
+			<th scope="col">degradable</th>
+			<th scope="col">non degradable</th>
+			<th scope="col">collected date</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<%result.forEach((item)=>{ %>
+		<tr>
+			<td style="display: none"><%=item._id%></td>
+			<td><%=item.driver_id%></td>
+			<td><%=item.degradable%></td>
+			<td><%=item.non_degradable%></td>
+			<td><%=item.collected_date%></td>
+			<%if(access.user.role == 'admin'){%>
+			<td>
+				<a href="/editgarbage/<%=item._id%>" class="btn" id="update-btn"
+					><i class="far fa-edit"></i
+				></a>
+			</td>
+			<td>
+				<a href="#" class="btn" id="delete-btn"><i class="fas fa-trash"></i></a>
+			</td>
+			<%}%>
+		</tr>
+		<% })%>
+	</tbody>
+</table>
+<script>
+	let deleteBtn = document.querySelectorAll("#delete-btn");
+	deleteBtn.forEach((btn) =>
+		btn.addEventListener("click", (e) => {
+			let deleteRefId =
+				e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild
+					.innerText;
+			console.log(deleteRefId);
+			let res = confirm("are you sure?");
+
+			if (res) {
+				fetch("/deletegarbage/" + deleteRefId, {
+					method: "delete",
+				}).then((res) => {
+					location.replace("/garbage");
+				});
+			}
+		})
+	);
+</script>
+<%- include('partials/footer') %>
